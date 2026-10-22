@@ -1,0 +1,952 @@
+/* =====================================================
+   عتيم | ATEEM — ثيم رائد (سلة) — v6
+   أبيض + بيج بالتبادل + أخضر عتيم الغامق + سدو ناعم
+   خط واحد: ثمانية Sans (Bold للعناوين / Regular للنصوص)
+   -----------------------------------------------------
+   الألوان:  أبيض #FBF9F5 (الخلفية)  ·  بيج #E6DCCD (أقسام)  ·  #EFE8DC (صور المنتجات)  ·  #CDBFA8 (حدود)
+             أخضر #1E3333 (نص وأزرار)  ·  #142424 (الفوتر)  ·  #7E766A (نص ثانوي)
+   - الخطوط مرفوعة: https://cdn.jsdelivr.net/gh/Awad1332/islamy@main/ateem-fonts
+   - الصق معاه ملف ateem-raed.js في خانة JavaScript المخصص
+   - احذف كود CSS القديم كله (خد نسخة احتياطية منه أولًا)
+   ===================================================== */
+
+
+/* ============ 1. الخط — ثمانية Sans ============ */
+@font-face{font-family:'Thmanyah Sans';src:url('https://cdn.jsdelivr.net/gh/Awad1332/islamy@main/ateem-fonts/thmanyahsans-Regular.woff2') format('woff2');font-weight:300 400;font-display:swap}
+@font-face{font-family:'Thmanyah Sans';src:url('https://cdn.jsdelivr.net/gh/Awad1332/islamy@main/ateem-fonts/thmanyahsans-Medium.woff2') format('woff2');font-weight:500 600;font-display:swap}
+@font-face{font-family:'Thmanyah Sans';src:url('https://cdn.jsdelivr.net/gh/Awad1332/islamy@main/ateem-fonts/thmanyahsans-Bold.woff2') format('woff2');font-weight:700 900;font-display:swap}
+
+
+/* ============ 2. الألوان والمتغيرات ============ */
+:root{
+  /* سكيل الألوان: أخضر + بيج فقط */
+  --g-900:#1E3333;  /* العناوين، الأزرار الأساسية */
+  --g-700:#2F4A48;  /* hover */
+  --g-500:#7E766A;  /* النصوص الثانوية (رمادي دافي) */
+  --g-100:#E7ECEA;  /* خلفيات الأيقونات */
+  --b-50:#E6DCCD;   /* خلفية المتجر — بيج واحد للصفحة كلها */
+  --b-100:#E6DCCD;  /* نفس الخلفية (من غير بلوكات ملونة) */
+  --b-200:#DCD0BD;  /* أسطح: خلفية صور المنتجات */
+  --b-300:#CDBFA8;  /* الحدود */
+  --b-500:#B5A283;  /* النجوم / تفاصيل صغيرة */
+
+  --ateem-dark:var(--g-900);
+  --ateem-green:var(--g-700);
+  --ateem-gold:var(--b-300);
+  --ateem-gold-deep:var(--b-500);
+  --ateem-red:var(--g-900);
+  --ateem-cream:var(--b-50);
+  --ateem-sand:var(--b-100);
+  --ateem-line:#D5C8B3;
+  --ateem-text:var(--g-900);
+  --ateem-muted:var(--g-500);
+
+  --color-primary:#1E3333;
+  --color-primary-dark:#1E3333;
+  --color-primary-light:#2F4A48;
+  --color-primary-reverse:#FFFFFF;
+  --font-main:'Thmanyah Sans';
+
+  /* السدو اتشال من الهوية */
+  /* السدو الناعم: خط رفيع بمعيّنات صغيرة + علامة مائية خفيفة جدًا */
+  --sadu-band-cream:url("data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22220%22 height=%2216%22 viewBox=%220 0 220 16%22%3E%3Crect y=%227.5%22 width=%22220%22 height=%221%22 fill=%22%23B5A283%22/%3E%3Cpath d=%22M96 5.5l2.5 2.5l-2.5 2.5l-2.5 -2.5z%22 fill=%22%23B5A283%22/%3E%3Cpath d=%22M110 4l4 4l-4 4l-4 -4z%22 fill=%22%231E3333%22/%3E%3Cpath d=%22M124 5.5l2.5 2.5l-2.5 2.5l-2.5 -2.5z%22 fill=%22%23B5A283%22/%3E%3C/svg%3E");
+  --sadu-band-dark:url("data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22220%22 height=%2216%22 viewBox=%220 0 220 16%22%3E%3Crect y=%227.5%22 width=%22220%22 height=%221%22 fill=%22%23CFC7B8%22/%3E%3Cpath d=%22M96 5.5l2.5 2.5l-2.5 2.5l-2.5 -2.5z%22 fill=%22%23CFC7B8%22/%3E%3Cpath d=%22M110 4l4 4l-4 4l-4 -4z%22 fill=%22%23E6DCCD%22/%3E%3Cpath d=%22M124 5.5l2.5 2.5l-2.5 2.5l-2.5 -2.5z%22 fill=%22%23CFC7B8%22/%3E%3C/svg%3E");
+  --sadu-orn-light:url("data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22260%22 height=%2220%22 viewBox=%220 0 260 20%22%3E%3Crect x=%220%22 y=%229.5%22 width=%22104%22 height=%221%22 fill=%22%23B5A283%22/%3E%3Crect x=%22156%22 y=%229.5%22 width=%22104%22 height=%221%22 fill=%22%23B5A283%22/%3E%3Cpath d=%22M116 7l3 3l-3 3l-3 -3z%22 fill=%22%23B5A283%22/%3E%3Cpath d=%22M130 5l5 5l-5 5l-5 -5z%22 fill=%22%231E3333%22/%3E%3Cpath d=%22M144 7l3 3l-3 3l-3 -3z%22 fill=%22%23B5A283%22/%3E%3C/svg%3E");
+  --sadu-orn-dark:url("data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22260%22 height=%2220%22 viewBox=%220 0 260 20%22%3E%3Crect x=%220%22 y=%229.5%22 width=%22104%22 height=%221%22 fill=%22%23CFC7B8%22/%3E%3Crect x=%22156%22 y=%229.5%22 width=%22104%22 height=%221%22 fill=%22%23CFC7B8%22/%3E%3Cpath d=%22M116 7l3 3l-3 3l-3 -3z%22 fill=%22%23CFC7B8%22/%3E%3Cpath d=%22M130 5l5 5l-5 5l-5 -5z%22 fill=%22%23E6DCCD%22/%3E%3Cpath d=%22M144 7l3 3l-3 3l-3 -3z%22 fill=%22%23CFC7B8%22/%3E%3C/svg%3E");
+  --sadu-water-cream:url("data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%2296%22 height=%2296%22 viewBox=%220 0 96 96%22 opacity=%220.05%22%3E%3Cg fill=%22none%22 stroke=%22%231E3333%22 stroke-width=%221%22%3E%3Cpath d=%22M48 30l18 18l-18 18l-18 -18z%22/%3E%3C/g%3E%3Cg fill=%22%231E3333%22%3E%3Cpath d=%22M0 -3l3 3l-3 3l-3 -3zM96 -3l3 3l-3 3l-3 -3zM0 93l3 3l-3 3l-3 -3zM96 93l3 3l-3 3l-3 -3z%22/%3E%3C/g%3E%3C/svg%3E");
+  --sadu-water-dark:url("data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%2296%22 height=%2296%22 viewBox=%220 0 96 96%22 opacity=%220.05%22%3E%3Cg fill=%22none%22 stroke=%22%23E6DCCD%22 stroke-width=%221%22%3E%3Cpath d=%22M48 30l18 18l-18 18l-18 -18z%22/%3E%3C/g%3E%3Cg fill=%22%23E6DCCD%22%3E%3Cpath d=%22M0 -3l3 3l-3 3l-3 -3zM96 -3l3 3l-3 3l-3 -3zM0 93l3 3l-3 3l-3 -3zM96 93l3 3l-3 3l-3 -3z%22/%3E%3C/g%3E%3C/svg%3E");
+  --ateem-white:#FBF9F5;
+
+  --ico-user:url("data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 24 24%22 fill=%22none%22 stroke=%22%23000%22 stroke-width=%221.7%22 stroke-linecap=%22round%22 stroke-linejoin=%22round%22%3E%3Ccircle cx=%2212%22 cy=%228%22 r=%224%22/%3E%3Cpath d=%22M4 21c1.5-4 4.5-6 8-6s6.5 2 8 6%22/%3E%3C/svg%3E");
+  --ico-bag:url("data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 24 24%22 fill=%22none%22 stroke=%22%23000%22 stroke-width=%221.7%22 stroke-linecap=%22round%22 stroke-linejoin=%22round%22%3E%3Cpath d=%22M5 8h14l-1.2 11.2a2 2 0 0 1-2 1.8H8.2a2 2 0 0 1-2-1.8z%22/%3E%3Cpath d=%22M9 8V6a3 3 0 0 1 6 0v2%22/%3E%3C/svg%3E");
+  --ico-menu:url("data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 24 24%22 fill=%22none%22 stroke=%22%23000%22 stroke-width=%221.7%22 stroke-linecap=%22round%22 stroke-linejoin=%22round%22%3E%3Cpath d=%22M4 7h16M4 12h11M4 17h16%22/%3E%3C/svg%3E");
+  --ico-search:url("data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 24 24%22 fill=%22none%22 stroke=%22%23000%22 stroke-width=%221.7%22 stroke-linecap=%22round%22 stroke-linejoin=%22round%22%3E%3Ccircle cx=%2211%22 cy=%2211%22 r=%227%22/%3E%3Cpath d=%22M20 20l-3.5-3.5%22/%3E%3C/svg%3E");
+}
+
+
+/* ============ 3. الأساسيات ============ */
+body{
+  background-color:var(--ateem-cream) !important;
+  background-image:none !important; /* خلفية سادة — من غير نقش */
+  color:var(--ateem-text);
+}
+body, button, input, select, textarea,
+.s-button-element, .s-button-text{
+  font-family:'Thmanyah Sans', -apple-system, BlinkMacSystemFont, sans-serif !important; /* ثمانية Sans لكل النصوص */
+}
+h1, h2, h3, h4,
+.s-reviews-header, .s-reviews-header *,
+.s-block__title, .s-block__title *,
+.banner__title,
+.s-block--features__item h2,
+.store-footer h3{
+  font-family:'Thmanyah Sans', sans-serif !important;
+  font-weight:700 !important;
+}
+.container{ padding-inline:16px !important; }
+@media (min-width:640px){ .s-block{ margin-top:4rem; } }
+
+
+/* ============ 4. الهيدر ============ */
+
+/* شريط البحث فوق الهيدر */
+.top-navbar{
+  display:block !important;
+  background:var(--ateem-sand) !important;
+  border-bottom:1px solid var(--ateem-line);
+  padding:10px 0 !important;
+}
+.top-navbar salla-menu,
+.top-navbar salla-contacts,
+.top-navbar .header-buttons,
+.top-navbar salla-bullet-delivery-tag{ display:none !important; }
+.top-navbar .container > .flex-1{ justify-content:center; }
+.top-navbar .header-search{
+  flex:0 1 560px !important;
+  max-width:560px;
+  margin-inline:auto;
+}
+.top-navbar .header-search input,
+.s-search-input{
+  height:44px !important;
+  border-radius:999px !important;
+  border:1px solid #CDBFA8 !important;
+  background:#E6DCCD !important;
+  font-size:14px;
+}
+
+/* الهيدر الرئيسي: الشعار يمين — الروابط في النص — الأيقونات يسار */
+#mainnav, #mainnav > .inner{
+  background:var(--ateem-cream) !important;
+  box-shadow:none !important;
+}
+#mainnav{
+  position:relative;
+  border-bottom:1px solid var(--ateem-line);
+}
+
+.navbar-brand img{ max-height:52px; width:auto; max-width:9rem; }
+
+@media (min-width:1024px){
+  #mainnav .inner .container > .flex{
+    display:flex !important;
+    align-items:center !important;
+    justify-content:space-between !important;
+    position:relative !important;
+  }
+  /* القائمة في منتصف الصفحة بالظبط */
+  custom-main-menu{
+    position:absolute !important;
+    left:50% !important; top:0 !important; bottom:0 !important;
+    transform:translateX(-50%) !important;
+    height:auto !important; min-height:0 !important;
+    display:flex !important; align-items:center !important;
+    width:max-content !important;
+    max-width:calc(100% - 440px) !important;
+    margin:0 !important;
+  }
+  custom-main-menu > .mobile-menu{ margin:0 !important; padding:0 !important; height:auto !important; display:flex !important; align-items:center !important; }
+  /* الروابط والشعار والأيقونات على نفس المستوى */
+  custom-main-menu .main-menu{ justify-content:center; align-items:center !important; gap:4px; flex-wrap:nowrap !important; white-space:nowrap; padding:0 !important; margin:0 !important; }
+  custom-main-menu .main-menu > li > a{
+    font-size:14px;
+    font-weight:500;
+    color:var(--ateem-text) !important;
+    padding:10px 9px !important;
+    position:relative;
+  }
+  custom-main-menu .main-menu > li > a:hover{ color:var(--ateem-red) !important; }
+  /* فاصل معيّن بين الروابط */
+
+}
+
+/* أيقونات الهيدر — نفس أيقونات التصميم (خطية) */
+.s-user-menu-login-btn{
+  display:flex !important; align-items:center; justify-content:center;
+  width:44px !important; height:44px !important;
+  border-radius:999px !important;
+  border:1px solid #CDBFA8 !important;
+  background:transparent !important;
+}
+.s-user-menu-login-btn > *{ display:none !important; }
+.s-user-menu-login-btn::before{
+  content:""; width:21px; height:21px;
+  background:var(--ateem-dark);
+  -webkit-mask:var(--ico-user) center / contain no-repeat;
+          mask:var(--ico-user) center / contain no-repeat;
+}
+salla-cart-summary .s-cart-summary-wrapper{
+  position:relative; display:flex !important; align-items:center;
+  width:44px !important; height:44px; padding:0 !important; margin:0 !important; gap:0 !important;
+}
+salla-cart-summary .s-cart-summary-wrapper > div:first-child{
+  width:44px !important; height:44px !important;
+  border-radius:999px;
+  background:var(--ateem-dark) !important;
+  display:flex !important; align-items:center; justify-content:center;
+}
+salla-cart-summary .s-cart-summary-wrapper > div:first-child > *{ display:none !important; }
+salla-cart-summary .s-cart-summary-wrapper > div:first-child::before{
+  content:""; width:20px; height:20px;
+  background:#fff;
+  -webkit-mask:var(--ico-bag) center / contain no-repeat;
+          mask:var(--ico-bag) center / contain no-repeat;
+}
+salla-cart-summary .s-cart-summary-content{ display:none !important; } /* إخفاء الإجمالي جنب السلة زي التصميم */
+salla-cart-summary .s-cart-summary-count{
+  position:absolute !important; top:-3px !important; left:-3px !important; right:auto !important;
+  min-width:18px; height:18px; padding:0 4px;
+  border-radius:999px !important;
+  background:var(--ateem-gold) !important; color:var(--ateem-dark) !important;
+  font-size:11px !important; font-weight:700;
+  display:flex !important; align-items:center; justify-content:center; line-height:1;
+}
+/* أيقونة القائمة (الجوال) */
+.mburger i.sicon-menu{
+  display:inline-block; width:24px; height:24px; font-size:0 !important;
+  background:var(--ateem-dark);
+  -webkit-mask:var(--ico-menu) center / contain no-repeat;
+          mask:var(--ico-menu) center / contain no-repeat;
+}
+.mburger i.sicon-menu::before{ content:none !important; }
+/* أيقونة البحث */
+.s-search-icon-wrap{ z-index:2; display:flex; align-items:center; }
+.s-search-icon{
+  display:inline-block; width:18px; height:18px; font-size:0 !important;
+  background:var(--ateem-dark);
+  -webkit-mask:var(--ico-search) center / contain no-repeat;
+          mask:var(--ico-search) center / contain no-repeat;
+}
+.s-search-icon *, .s-search-icon::before{ display:none !important; content:none !important; }
+
+
+/* ============ 5. البنر الرئيسي ============ */
+.s-block--fixed-banner.wide-placeholder:first-of-type{ margin-top:0 !important; }
+.s-block--fixed-banner.wide-placeholder > .container{ max-width:100% !important; padding:0 !important; }
+.banner--fixed, .banner--fixed img{ border-radius:0 !important; background:transparent !important; }
+#main-content > .s-block--fixed-banner:first-of-type{ position:relative; }
+
+
+
+/* ============ 6. عناوين الأقسام + زخرفة السدو ============ */
+.s-block--bundle-section-header{ position:relative; }
+
+
+
+/* ============ 7. بنرات الأقسام (المربعة) ============ */
+.s-block--banners .banner-entry{
+  border-radius:12px !important;
+  overflow:hidden !important;
+  position:relative;
+  border:1px solid var(--ateem-line);
+  box-shadow:none;
+  transition:transform .35s ease, box-shadow .35s ease;
+}
+.s-block--banners .banner-entry:hover{
+  transform:translateY(-4px);
+  box-shadow:0 12px 26px rgba(30,51,51,.08);
+}
+/* 4 صور مربعة: صفين في الجوال — صف واحد في الديسكتوب */
+.s-block--banners > .grid:has(> a:nth-child(4)){ grid-template-columns:repeat(2,minmax(0,1fr)) !important; gap:14px !important; }
+@media (min-width:768px){
+  .s-block--banners > .grid:has(> a:nth-child(4)){ grid-template-columns:repeat(4,minmax(0,1fr)) !important; gap:22px !important; }
+}
+.s-block--banners > .grid:has(> a:nth-child(4)) > .banner-entry{ height:auto !important; aspect-ratio:1 / 1; background-size:cover !important; background-position:center !important; }
+/* معيّن أحمر فوق كل صورة — زي التصميم */
+
+.s-block--banners{ padding-top:10px; }
+/* التصاميم فيها النص جاهز — نخفي نص الثيم فوقها */
+.s-block--banners .banner-entry__text{ display:none !important; }
+
+
+/* ============ 8. كروت المنتجات ============ */
+/* عنوان سلايدر المنتجات — في المنتصف بزخرفة السدو زي التصميم */
+.s-slider-block__title{
+  display:flex !important; flex-direction:column; align-items:center; justify-content:center;
+  gap:14px; position:relative; width:100%;
+  margin-bottom:32px !important; text-align:center;
+}
+.s-slider-block__title-right{ display:flex; flex-direction:column; align-items:center; gap:6px; }
+/* رائد بيضيف مسافة 32px جنب العنوان للأسهم — بنشيلها عشان العنوان يبقى في النص بالظبط */
+.s-slider-block__title-right,
+.s-slider-block__title-right h2{
+  padding-left:0 !important; padding-right:0 !important; padding-inline:0 !important;
+  margin-inline:auto !important; text-align:center !important;
+}
+.s-slider-block__title-right h2{
+  margin:0 !important;
+  font-family:'Thmanyah Sans',sans-serif !important;
+  font-weight:700 !important;
+  font-size:clamp(26px, 3vw, 40px) !important;
+  line-height:1.4 !important;
+  color:var(--ateem-dark) !important;
+}
+
+.s-slider-block__title-right p{ margin:0 !important; font-size:14px; color:var(--ateem-muted); }
+.s-slider-block__title-left{ display:flex !important; align-items:center; gap:10px; }
+/* زر عرض الكل */
+.s-slider-block__display-all{
+  display:inline-flex !important; align-items:center; gap:8px;
+  height:44px; padding:0 20px;
+  border:1px solid var(--ateem-dark); border-radius:8px;
+  color:var(--ateem-dark) !important; font-size:14px; font-weight:500; text-decoration:none;
+  transition:background .25s, color .25s;
+}
+
+.s-slider-block__display-all:hover{ background:var(--ateem-dark); color:#fff !important; }
+/* أسهم السلايدر */
+.s-slider-block__title-nav{ display:flex !important; gap:8px; }
+.s-slider-nav-arrow{
+  width:44px !important; height:44px !important;
+  border-radius:999px !important;
+  border:1px solid #CDBFA8 !important;
+  background:#E6DCCD !important;
+  display:flex !important; align-items:center; justify-content:center;
+  transition:background .25s;
+}
+.s-slider-nav-arrow svg{ fill:var(--ateem-dark) !important; width:18px; height:18px; }
+.s-slider-nav-arrow:not([disabled]):hover{ background:var(--ateem-dark) !important; border-color:var(--ateem-dark) !important; }
+.s-slider-nav-arrow:not([disabled]):hover svg{ fill:#fff !important; }
+.s-slider-nav-arrow[disabled]{ opacity:.4; }
+/* الديسكتوب: عرض الكل والأسهم على الشمال، والعنوان في النص */
+@media (min-width:768px){
+  .s-slider-block__title:has(.s-slider-block__title-right) .s-slider-block__title-left{ position:absolute; left:0; bottom:24px; }
+}
+/* سلايدر من غير عنوان (التبويبات / الآراء): الأسهم بس على الشمال */
+.s-slider-block__title:not(:has(.s-slider-block__title-right)){ flex-direction:row; justify-content:flex-end; margin-bottom:16px !important; }
+.s-slider-block__title:not(:has(.s-slider-block__title-right)) .swiper-button-lock{ display:none !important; }
+.s-product-card-entry{ /* خلفية كارت المنتج */
+  background:#E6DCCD !important;
+  border:1px solid #D5C8B3 !important;
+  border-radius:12px !important;
+  padding:8px 8px 14px !important;
+  box-shadow:none !important;
+  height:100%;
+  transition:transform .3s ease, box-shadow .3s ease;
+}
+.s-product-card-entry:hover{
+  transform:translateY(-4px);
+  box-shadow:0 12px 26px rgba(30,51,51,.08) !important;
+}
+.s-product-card-image{
+  background:#E6DCCD !important;
+  border:0 !important;
+  border-radius:8px !important;
+  padding:0 !important;
+  overflow:hidden;
+}
+.s-product-card-image img,
+.s-product-card-image-cover{ border-radius:8px !important; }
+.s-product-card-content{ text-align:center; padding:12px 6px 0 !important; }
+.s-product-card-content-footer{ padding:0 !important; margin-top:10px; }
+.s-product-card-content-title,
+.s-product-card-content-title a{
+  font-size:16px !important;
+  font-weight:700 !important;
+  color:var(--ateem-dark) !important;
+  line-height:1.6 !important;
+}
+.s-product-card-price{
+  color:var(--ateem-red) !important;
+  font-weight:700 !important;
+  justify-content:center;
+}
+.s-product-card-content-sub{ justify-content:center !important; }
+.s-product-card-content-footer .s-button-element{
+  height:46px;
+  border-radius:8px !important;
+  background:#DCD0BD !important; /* زر بيج هادي بدل الأخضر — زي مرجع العميل */
+  border-color:#DCD0BD !important;
+  color:var(--ateem-dark) !important;
+  font-weight:500;
+  transition:background .25s ease, color .25s ease;
+}
+.s-product-card-content-footer .s-button-element:hover{ background:var(--ateem-dark) !important; border-color:var(--ateem-dark) !important; color:#fff !important; }
+.s-product-card-wishlist-btn .s-button-element{
+  background:rgba(251,246,236,.94) !important;
+  border:0 !important;
+  color:var(--ateem-dark) !important;
+}
+.s-product-card-promotion-title{
+  background:var(--ateem-red) !important;
+  color:#fff !important;
+  border-radius:4px !important;
+}
+
+
+/* منتجات بتبويبات (الأكثر طلبًا) */
+.s-block--tabs-produtcs{
+  background:transparent !important;
+}
+.s-block--tabs-produtcs button.tab-trigger{
+  border-radius:999px !important;
+  min-height:44px;
+  border:1px solid #CDBFA8 !important;
+  background:transparent !important;
+  color:var(--ateem-text) !important;
+  font-weight:500;
+}
+.s-block--tabs-produtcs button.tab-trigger.is-active{
+  background:var(--ateem-dark) !important;
+  border-color:var(--ateem-dark) !important;
+  color:#E6DCCD !important;
+}
+
+
+/* ============ 9. البنر المزدوج / بنر الاقتناء ============ */
+.s-block--bundle-double-banner{
+  display:flex !important;
+  justify-content:center !important;
+  width:100% !important;
+}
+.s-block--bundle-double-banner > *{
+  display:block !important;
+  width:100% !important;
+  max-width:1280px !important;
+  margin-inline:auto !important;
+}
+
+
+
+
+
+/* ============ 10. المميزات ============ */
+.s-block--features{
+  position:relative;
+  background:transparent;
+  border-top:1px solid var(--ateem-line);
+  border-bottom:1px solid var(--ateem-line);
+  max-width:100% !important;
+  padding-block:32px !important;
+}
+.s-block--features > .grid{ max-width:1240px; margin-inline:auto; }
+.s-block--features__item{
+  background:transparent !important;
+  box-shadow:none !important;
+  text-align:center;
+}
+/* أيقونات المميزات: ملوّنة وبتتحرك مع الماوس */
+.s-block--features__item .feature-icon{
+  width:60px !important; height:60px !important;
+  margin:0 auto 14px !important;
+  background:#E7ECEA !important;
+  border:1px solid #DCE3E0 !important;
+  border-radius:999px !important;
+  display:flex !important; align-items:center; justify-content:center;
+  transition:transform .35s cubic-bezier(.2,.7,.2,1), background .3s ease, border-color .3s ease;
+}
+.s-block--features__item .feature-icon i{
+  color:var(--ateem-red) !important;
+  font-size:24px !important;
+  transition:color .3s ease, transform .35s ease;
+}
+.s-block--features__item:nth-child(2n) .feature-icon{ background:#E7ECEA !important; border-color:#DCE3E0 !important; }
+.s-block--features__item:nth-child(2n) .feature-icon i{ color:#1E3333 !important; }
+.s-block--features__item:nth-child(3n) .feature-icon{ background:#E7ECEA !important; border-color:#DCE3E0 !important; }
+.s-block--features__item:nth-child(3n) .feature-icon i{ color:#B5A283 !important; }
+.s-block--features__item:hover .feature-icon{ transform:translateY(-5px); background:var(--ateem-red) !important; border-color:var(--ateem-red) !important; }
+.s-block--features__item:hover .feature-icon i{ color:#fff !important; transform:scale(1.08); }
+.s-block--features__item h2{
+  font-size:16px !important;
+  color:var(--ateem-dark) !important;
+  margin-bottom:4px;
+}
+.s-block--features__item p{ color:var(--ateem-muted) !important; font-size:13px; }
+
+
+/* ============ 11. آراء العملاء ============ */
+.s-reviews-testimonial{
+  background:#E6DCCD !important;
+  border:1px solid var(--ateem-line) !important;
+  border-radius:12px !important;
+  box-shadow:none !important;
+}
+.s-reviews-testimonial__rating,
+.s-reviews-testimonial__rating *{ color:#B5A283 !important; }
+.s-reviews-testimonial__name_wrapper{ color:var(--ateem-dark) !important; font-weight:700; }
+
+
+/* آراء العملاء على الجوال: إظهار نص الرأي (رائد بيخفيه) + قصه على 4 أسطر بـ "..." + كروت بنفس الارتفاع */
+@media (max-width:767px){
+  .s-reviews-swiper-slide{ height:auto !important; }
+  .s-reviews-testimonial{ position:relative; height:100% !important; padding:22px 16px 18px !important; display:flex !important; }
+  .s-reviews-testimonial__inner{ flex-direction:column !important; align-items:center !important; text-align:center !important; width:100% !important; gap:6px; }
+  .s-reviews-testimonial__avatar{ width:56px !important; height:56px !important; margin:0 auto !important; flex:none; }
+  .s-reviews-testimonial__avatar img{ width:100% !important; height:100% !important; object-fit:cover; border-radius:50%; border:2px solid var(--ateem-gold); }
+  .s-reviews-testimonial__text{ width:100% !important; display:flex !important; flex-direction:column; align-items:center; flex:1; }
+  .s-reviews-testimonial__text p{
+    display:-webkit-box !important; -webkit-box-orient:vertical;
+    -webkit-line-clamp:4; line-clamp:4; overflow:hidden; text-overflow:ellipsis;
+    margin:4px 0 12px !important;
+    font-size:14px !important; line-height:1.8 !important;
+    min-height:calc(1.8em * 4);
+    color:#1E3333;
+  }
+  .s-reviews-testimonial__text p br{ display:none; }
+  .s-reviews-testimonial__name_wrapper{ flex-direction:column !important; align-items:center !important; gap:4px; width:100%; margin-top:auto; padding-top:10px; border-top:1px dashed var(--ateem-line); }
+  .s-reviews-testimonial__info h2{ font-size:15px !important; margin:0 !important; }
+  .s-reviews-testimonial__rating{ display:flex !important; margin:0 !important; justify-content:center; }
+  .s-reviews-testimonial__icon{ position:absolute !important; top:14px; left:14px; opacity:.35; }
+  .s-reviews-testimonial__icon svg{ width:22px; height:22px; }
+}
+
+
+/* ============ 12. الفوتر ============ */
+.store-footer{ /* فوتر فاتح وهادي بدل الأخضر الغامق */
+  background:var(--ateem-sand) !important;
+  color:var(--ateem-muted) !important;
+  position:relative;
+  border-top:1px solid var(--ateem-line);
+}
+
+.store-footer__inner{ background:transparent !important; padding-top:40px !important; }
+.store-footer h3{ color:var(--ateem-dark) !important; font-size:16px !important; }
+
+/* شعار عتيم الذهبي بدل اسم المتجر في الفوتر
+   (بياخد شكل الشعار من لوجو الهيدر ويلوّنه ذهبي — لو غيّرت اللوجو، غيّر الرابط هنا) */
+.store-footer__inner .container > div:first-child > a > h3{
+  font-size:0 !important; line-height:0 !important; color:transparent !important;
+  width:181px; height:56px;
+  margin:0 0 14px !important;
+  background:var(--ateem-dark) !important;
+  -webkit-mask:url("https://cdn.files.salla.network/other/1044935951/c021c638-0a4f-4dae-be2b-70f01e844619-original.webp") right center / contain no-repeat;
+          mask:url("https://cdn.files.salla.network/other/1044935951/c021c638-0a4f-4dae-be2b-70f01e844619-original.webp") right center / contain no-repeat;
+}
+.store-footer__inner .container > div:first-child > a > h3::before{ content:none !important; display:none !important; }
+
+.store-footer a,
+.store-footer p,
+.store-footer .s-contacts-item,
+.store-footer .s-contacts-item *{ color:var(--ateem-muted) !important; }
+.store-footer a:hover{ color:var(--ateem-red) !important; }
+.store-footer .copyright-text p{ color:#7E766A !important; }
+.store-footer > .container:last-child,
+.store-footer > div:last-child{ border-top:1px solid var(--ateem-line); }
+/* أيقونات السوشيال والتواصل — إطار دائري واحد بس */
+.store-footer .s-social-link{
+  border:0 !important;
+  background:transparent !important;
+  border-radius:0 !important;
+  box-shadow:none !important;
+}
+.store-footer .s-social-link > a{
+  width:40px; height:40px;
+  display:flex !important; align-items:center; justify-content:center;
+  border:1px solid #CDBFA8 !important;
+  border-radius:999px !important;
+  background:transparent !important;
+  color:var(--ateem-dark) !important;
+  transition:background .25s ease;
+}
+.store-footer .s-social-link > a:hover{ background:#E6DCCD !important; }
+.store-footer .s-social-link svg,
+.store-footer .s-contacts-icon svg{ fill:var(--ateem-dark) !important; }
+.store-footer .s-contacts-icon{
+  border:1px solid #CDBFA8 !important;
+  border-radius:999px !important;
+  background:transparent !important;
+}
+
+
+/* ============ 13. كلاسات السدو الناعم (لأقسام مشمر) ============ */
+.ateem-ornament, .ateem-ornament--dark{ width:200px; height:16px; margin-inline:auto; background:var(--sadu-orn-light) no-repeat center / contain; }
+.ateem-band-dark, .ateem-band-green, .ateem-band-cream{ height:16px; background:var(--sadu-band-cream) repeat-x center / auto 16px; }
+.ateem-pattern-light, .ateem-pattern-dark{ background-image:var(--sadu-water-cream); background-size:96px auto; }
+
+
+/* ============ 14. الجوال ============ */
+@media (max-width:1023px){
+  .navbar-brand img{ max-height:40px; }
+  .top-navbar{ padding:8px 0 !important; }
+
+}
+
+
+/* ============ 15. صفحة المنتج ============ */
+
+/* المسار (Breadcrumb) */
+.product-single .breadcrumbs{ padding-block:18px !important; }
+.product-single .s-breadcrumb-item,
+.product-single .s-breadcrumb-item a{ font-size:13px; color:var(--ateem-muted) !important; }
+.product-single .s-breadcrumb-item:last-child{ color:var(--ateem-red) !important; font-weight:500; }
+
+/* المعرض: برواز كريمي بإطار ذهبي */
+.product-single .details-slider{
+  background:#E6DCCD !important;
+  border:1px solid #D5C8B3;
+  border-radius:14px !important;
+  padding:8px;
+  box-shadow:0 14px 34px rgba(30,51,51,.08);
+}
+.product-single .details-slider .swiper,
+.product-single .details-slider img{ border-radius:10px !important; }
+.product-single .details-slider .swiper-slide{ background:#E6DCCD; }
+/* الصور المصغرة */
+.product-single .details-slider ~ * .swiper-slide,
+.product-single .thumbs-slider .swiper-thumbs .swiper-slide{
+  border:1px solid #D5C8B3 !important;
+  border-radius:8px !important;
+  overflow:hidden;
+  opacity:.65;
+  transition:opacity .2s;
+}
+.product-single .swiper-slide-thumb-active{ opacity:1 !important; border-color:var(--ateem-dark) !important; }
+
+/* العمود الأيسر (التفاصيل) */
+.product-single .container--product-details .main-content{ padding-inline-start:8px; }
+
+/* اسم المنتج */
+.product-single .container--product-details h1{
+  font-family:'Thmanyah Sans',sans-serif !important;
+  font-weight:700 !important;
+  font-size:clamp(26px, 2.6vw, 36px) !important;
+  line-height:1.4 !important;
+  color:var(--ateem-dark) !important;
+  margin-bottom:12px !important;
+}
+
+
+/* السعر */
+.product-single .main-content > .flex.whitespace-nowrap{ margin-bottom:18px; }
+.product-single .main-content > .flex.whitespace-nowrap p,
+.product-single .total-price{
+  font-size:26px !important;
+  font-weight:700 !important;
+  color:var(--ateem-green) !important;
+}
+.product-single .text-red-800{ color:var(--ateem-red) !important; }
+.product-single .line-through,
+.product-single .before-price{ color:#9AA5A3 !important; font-size:16px; }
+
+/* الوصف */
+.product-single .product__description{
+  padding:0 !important;
+  margin-bottom:20px !important;
+  font-size:15px;
+  line-height:2 !important;
+  color:#3B4747 !important;
+}
+.product-single .product__description p{ margin-bottom:10px; }
+.product-single .product__description strong,
+.product-single .product__description b{ color:var(--ateem-dark); }
+
+/* أزرار المشاركة والمفضلة */
+.product-single .main-content salla-social-share button,
+.product-single .main-content .btn--wishlist .s-button-element,
+.product-single .main-content button.btn--wishlist{
+  width:44px !important; height:44px !important;
+  border-radius:999px !important;
+  border:1px solid #CDBFA8 !important;
+  background:transparent !important;
+  color:var(--ateem-dark) !important;
+}
+
+/* كارت الشراء (السعر + الكمية + الزر) */
+.product-single form.product-form{
+  background:#E6DCCD;
+  border:1px solid #D5C8B3;
+  border-radius:14px;
+  overflow:hidden;
+  box-shadow:0 10px 26px rgba(30,51,51,.06);
+}
+.product-single form.product-form > section{
+  background:transparent !important;
+  border-radius:0 !important;
+}
+.product-single form.product-form > section + section{ border-top:1px dashed #D5C8B3; }
+.product-single form.product-form .form-label,
+.product-single form.product-form .form-label b{ color:var(--ateem-dark) !important; font-weight:700; }
+
+/* خيارات المنتج (لو موجودة) */
+.product-single .s-product-options-wrapper label,
+.product-single .s-product-options-option-label{ color:var(--ateem-dark) !important; font-weight:700; }
+.product-single .s-product-options-thumbnails-wrapper input:checked + label,
+.product-single .s-product-options-colors-wrapper input:checked + label{ outline:2px solid var(--ateem-dark) !important; }
+
+/* الكمية */
+.product-single .s-quantity-input-container{
+  border:1px solid #CDBFA8 !important;
+  border-radius:999px !important;
+  overflow:hidden;
+  background:#fff;
+}
+.product-single .s-quantity-input-button{ width:40px; color:var(--ateem-dark) !important; }
+.product-single .s-quantity-input-button:hover{ background:var(--ateem-sand) !important; }
+.product-single .s-quantity-input-input{ font-weight:700; color:var(--ateem-dark) !important; }
+
+/* زر أضف للسلة */
+.product-single .sticky-product-bar .s-button-element.s-button-primary,
+.product-single .sticky-product-bar__btn .s-button-solid{
+  height:52px !important;
+  border-radius:10px !important;
+  background:var(--ateem-dark) !important;
+  border-color:var(--ateem-dark) !important;
+  color:#fff !important;
+  font-size:16px !important;
+  font-weight:700 !important;
+  transition:background .25s;
+}
+.product-single .sticky-product-bar .s-button-element.s-button-primary:hover{ background:var(--ateem-green) !important; }
+
+/* الجوال: شريط الشراء الثابت أسفل الشاشة */
+@media (max-width:767px){
+  .product-single .container--product-details h1{ font-size:24px !important; }
+  .product-single .sticky-product-bar{
+    background:#E6DCCD !important;
+    border-top:1px solid #D5C8B3;
+    box-shadow:0 -8px 20px rgba(30,51,51,.08);
+  }
+}
+
+
+/* ============ 16. الشاشة الافتتاحية (الصفحة الرئيسية فقط) ============ */
+/* بتظهر أول ما الصفحة تفتح وتختفي لوحدها بعد ثانيتين تقريبًا
+   ملف ateem-raed.js بيخليها تظهر مرة واحدة بس في كل زيارة */
+
+/* الخلفية */
+html:has(body.index:not(.ateem-no-splash))::before{
+  content:"";
+  position:fixed; inset:0;
+  z-index:2147483000;
+  background-color:#E6DCCD;
+  pointer-events:none;
+  animation:ateem-splash-out .55s ease 1.75s forwards;
+}
+/* الشعار الذهبي */
+body.index:not(.ateem-no-splash)::before{
+  content:"";
+  position:fixed;
+  top:50%; left:50%;
+  width:min(240px, 60vw); aspect-ratio:1440 / 446;
+  transform:translate(-50%, -60%);
+  z-index:2147483001;
+  background:#1E3333;
+  -webkit-mask:url("https://cdn.files.salla.network/other/1044935951/c021c638-0a4f-4dae-be2b-70f01e844619-original.webp") center / contain no-repeat;
+          mask:url("https://cdn.files.salla.network/other/1044935951/c021c638-0a4f-4dae-be2b-70f01e844619-original.webp") center / contain no-repeat;
+  pointer-events:none;
+  opacity:0;
+  animation:
+    ateem-logo-in .7s cubic-bezier(.2,.7,.2,1) .1s forwards,
+    ateem-splash-out .45s ease 1.7s forwards;
+}
+/* شريط السدو اللي بيتملي (التحميل) */
+
+
+@keyframes ateem-logo-in{
+  from{ opacity:0; transform:translate(-50%, -45%); }
+  to  { opacity:1; transform:translate(-50%, -60%); }
+}
+@keyframes ateem-bar-fill{
+  from{ clip-path:inset(0 0 0 100%); }
+  to  { clip-path:inset(0 0 0 0); }
+}
+@keyframes ateem-splash-out{
+  to{ opacity:0; visibility:hidden; }
+}
+
+/* لو العميل مفعّل تقليل الحركة: نسخة أقصر من غير حركة */
+@media (prefers-reduced-motion: reduce){
+  html:has(body.index:not(.ateem-no-splash))::before,
+  body.index:not(.ateem-no-splash)::before{
+    animation:ateem-splash-out .2s ease .6s forwards !important;
+    opacity:1; clip-path:none;
+  }
+}
+
+
+/* ============ 17. توحيد الهوية الجديدة (الأوزان والأحجام) ============ */
+/* العناوين: Sans Bold — النصوص: Sans Regular — الأزرار والأسعار: Sans Medium */
+h1, h2, h3, h4,
+.s-slider-block__title-right h2,
+.s-reviews-header, .s-block__title{ font-weight:700 !important; letter-spacing:0 !important; }
+.s-slider-block__title-right h2{ font-size:clamp(24px, 2.6vw, 34px) !important; }
+.s-slider-block__title-right p{ font-size:15px !important; color:var(--g-500) !important; }
+.s-slider-block__title{ gap:8px; }
+
+/* القائمة */
+custom-main-menu .main-menu > li > a{ font-weight:500 !important; color:var(--g-900) !important; }
+custom-main-menu .main-menu{ gap:18px !important; }
+
+/* كارت المنتج: الاسم Sans Medium — السعر أخضر */
+.s-product-card-content-title,
+.s-product-card-content-title a{
+  font-family:'Thmanyah Sans', sans-serif !important;
+  font-weight:500 !important; font-size:15px !important; color:var(--g-900) !important;
+}
+.s-product-card-price{ color:var(--g-900) !important; font-weight:500 !important; font-size:16px !important; }
+.s-product-card-entry{ border-color:#D5C8B3 !important; background:#E6DCCD !important; }
+.s-product-card-image{ background:var(--b-200) !important; }
+.s-product-card-content-footer .s-button-element{ background:var(--b-200) !important; border-color:var(--b-200) !important; color:var(--g-900) !important; font-weight:500 !important; }
+.s-product-card-content-footer .s-button-element:hover{ background:var(--g-900) !important; border-color:var(--g-900) !important; color:#fff !important; }
+.s-product-card-promotion-title{ background:var(--g-900) !important; color:var(--b-50) !important; font-weight:500 !important; }
+
+/* زر عرض الكل */
+.s-slider-block__display-all{ border-color:var(--b-300) !important; border-radius:999px !important; font-weight:500 !important; }
+.s-slider-block__display-all:hover{ background:var(--g-900) !important; border-color:var(--g-900) !important; }
+
+/* التبويبات */
+.s-block--tabs-produtcs button.tab-trigger{ font-weight:500 !important; border-color:var(--b-300) !important; color:var(--g-900) !important; }
+.s-block--tabs-produtcs button.tab-trigger.is-active{ background:var(--g-900) !important; border-color:var(--g-900) !important; color:var(--b-50) !important; }
+
+/* صور الأقسام */
+.s-block--banners .banner-entry{ border:0 !important; outline:0 !important; }
+
+/* آراء العملاء */
+.s-reviews-testimonial{ background:#E6DCCD !important; border:1px solid #D5C8B3 !important; }
+.s-reviews-testimonial__name_wrapper,
+.s-reviews-testimonial__info h2{ font-family:'Thmanyah Sans', sans-serif !important; font-weight:500 !important; }
+.s-reviews-testimonial__rating, .s-reviews-testimonial__rating *{ color:var(--b-500) !important; }
+
+/* الفوتر */
+.store-footer h3{ font-family:'Thmanyah Sans', sans-serif !important; font-weight:500 !important; font-size:15px !important; }
+
+/* صفحة المنتج: وزن واحد للأسعار والعناوين الفرعية */
+.product-single .main-content > .flex.whitespace-nowrap p,
+.product-single .total-price{ font-family:'Thmanyah Sans', sans-serif !important; font-weight:500 !important; color:var(--g-900) !important; }
+.product-single form.product-form .form-label b,
+.product-single .s-product-options-option-label,
+.product-single .s-quantity-input-input{ font-weight:500 !important; }
+
+
+
+/* ============ 18. توجه v5: بسيط وهادي ============ */
+
+/* الخلفية: أبيض دافي — والأقسام المميزة بيج (بالتبادل) */
+body, .app-inner, #main-content{ background-color:#FBF9F5 !important; }
+.s-block--tabs-produtcs, .s-block--full-bg{ background:transparent !important; border:0 !important; }
+
+/* شريط البحث العلوي */
+.top-navbar{ background:#FBF9F5 !important; border-bottom:1px solid #E6DCCD !important; }
+.top-navbar .header-search input, .s-search-input{ background:#EFE8DC !important; border:0 !important; border-radius:6px !important; }
+
+/* الهيدر: الشعار في النص فوق — الروابط سطر تحته في النص — الأيقونات شمال */
+#mainnav, #mainnav > .inner{ background:#FBF9F5 !important; }
+#mainnav{ border-bottom:1px solid #E6DCCD !important; }
+@media (min-width:1024px){
+  #mainnav .inner .container > .flex{ min-height:132px !important; align-items:flex-start !important; position:relative !important; }
+  #mainnav .inner .container > .flex > div:last-child{ margin-top:20px !important; }
+  #mainnav .navbar-brand{
+    position:absolute !important; left:50% !important; top:44px !important;
+    transform:translate(-50%,-50%) !important; z-index:2;
+  }
+  custom-main-menu{
+    position:absolute !important; left:50% !important; right:auto !important; top:auto !important; bottom:0 !important;
+    transform:translateX(-50%) !important; max-width:100% !important; width:max-content !important; height:auto !important;
+  }
+  custom-main-menu .main-menu{ justify-content:center !important; gap:6px !important; }
+  custom-main-menu .main-menu > li > a{ font-size:14px !important; font-weight:500 !important; padding:12px 12px 14px !important; }
+}
+.navbar-brand img{ max-height:46px !important; }
+
+/* أيقونات الهيدر: من غير دواير */
+.s-user-menu-login-btn{ border:0 !important; }
+salla-cart-summary .s-cart-summary-wrapper > div:first-child{ background:transparent !important; }
+salla-cart-summary .s-cart-summary-wrapper > div:first-child::before{ background:#1E3333 !important; width:22px !important; height:22px !important; }
+salla-cart-summary .s-cart-summary-count{ background:#1E3333 !important; color:#E6DCCD !important; top:2px !important; left:2px !important; }
+
+/* عناوين الأقسام: في النص — Bold — وتحتها خط قصير */
+.s-slider-block__title-right h2,
+.s-block--testimonials .s-slider-block__title h2,
+.s-reviews-header h2{
+  font-size:clamp(26px, 2.6vw, 36px) !important; font-weight:700 !important; color:#1E3333 !important;
+  text-align:center !important;
+}
+.s-slider-block__title-right h2::after{
+  content:"" !important; display:block !important;
+  width:200px !important; height:16px !important; margin:16px auto 0 !important;
+  background:var(--sadu-orn-light) no-repeat center / contain !important; border-radius:0;
+}
+.s-slider-block__title-right p{ font-size:16px !important; color:#7E766A !important; }
+.s-slider-block__display-all{ border-radius:6px !important; border-color:#1E3333 !important; }
+
+/* كارت المنتج: من غير صندوق — الصورة هي البطل */
+.s-product-card-entry{
+  background:transparent !important; border:0 !important; box-shadow:none !important;
+  padding:0 !important; border-radius:0 !important;
+}
+.s-product-card-entry:hover{ transform:none !important; box-shadow:none !important; }
+.s-product-card-image{ background:#EFE8DC !important; border-radius:10px !important; overflow:hidden; }
+.s-product-card-image img{ transition:transform .5s ease; }
+.s-product-card-entry:hover .s-product-card-image img{ transform:scale(1.04); }
+.s-product-card-content{ text-align:start !important; padding:14px 2px 0 !important; }
+.s-product-card-content-title, .s-product-card-content-title a{ font-size:15px !important; font-weight:700 !important; line-height:1.6 !important; }
+.s-product-card-content-sub, .s-product-card-price{ justify-content:flex-start !important; }
+.s-product-card-price{ color:#7E766A !important; font-weight:500 !important; }
+.s-product-card-content-footer .s-button-element{
+  height:42px !important; border-radius:6px !important;
+  background:transparent !important; border:1px solid #1E3333 !important; color:#1E3333 !important;
+}
+.s-product-card-content-footer .s-button-element:hover{ background:#1E3333 !important; color:#E6DCCD !important; }
+.s-product-card-wishlist-btn .s-button-element{ background:rgba(251,249,245,.92) !important; }
+.s-product-card-promotion-title{ background:#1E3333 !important; color:#E6DCCD !important; border-radius:4px !important; }
+
+/* صور الأقسام والبنرات */
+.s-block--banners .banner-entry{ border-radius:10px !important; box-shadow:none !important; }
+.s-block--banners .banner-entry:hover{ transform:none !important; box-shadow:none !important; opacity:.94; }
+.s-block--banners > .grid{ gap:18px !important; }
+
+/* آراء العملاء */
+.s-reviews-testimonial{ background:transparent !important; border:1px solid #D5C8B3 !important; border-radius:10px !important; }
+
+/* الفوتر الغامق */
+.store-footer{ background:#142424 !important; color:#CFC7B8 !important; border-top:0 !important; }
+.store-footer h3{ color:#E6DCCD !important; }
+.store-footer__inner .container > div:first-child > a > h3{ background:#E6DCCD !important; }
+.store-footer a, .store-footer p, .store-footer .s-contacts-item, .store-footer .s-contacts-item *{ color:#CFC7B8 !important; }
+.store-footer a:hover{ color:#FFFFFF !important; }
+.store-footer .copyright-text p{ color:#9C9486 !important; }
+.store-footer > .container:last-child, .store-footer > div:last-child{ border-top:1px solid rgba(230,220,205,.15) !important; }
+.store-footer .s-social-link > a, .store-footer .s-contacts-icon{ border-color:rgba(230,220,205,.3) !important; }
+.store-footer .s-social-link svg, .store-footer .s-contacts-icon svg{ fill:#E6DCCD !important; }
+.store-footer .s-social-link > a{ color:#E6DCCD !important; }
+
+/* الشاشة الافتتاحية */
+html:has(body.index:not(.ateem-no-splash))::before{ background-color:#FBF9F5 !important; }
+
+/* عنوان آراء العملاء في النص زي باقي العناوين */
+.s-reviews-header-wrapper{ flex-direction:column !important; align-items:center !important; gap:10px !important; margin-bottom:28px !important; }
+.s-reviews-header{ font-size:clamp(26px, 2.6vw, 36px) !important; font-weight:700 !important; color:#1E3333 !important; text-align:center !important; }
+.s-reviews-header::after{ content:""; display:block; width:200px; height:16px; margin:16px auto 0; background:var(--sadu-orn-light) no-repeat center / contain; }
+.s-reviews-display-all{ font-size:14px !important; color:#7E766A !important; }
+.s-reviews-testimonial__rating svg, .s-rating-stars svg{ fill:#1E3333 !important; color:#1E3333 !important; }
+
+/* الهيدر مدموج فوق صورة الهيرو (الصفحة الرئيسية — ديسكتوب) */
+@media (min-width:1024px){
+  body.index .store-header{
+    position:absolute !important; top:0; left:0; right:0; z-index:30;
+    background:linear-gradient(to bottom, rgba(251,249,245,.92) 0%, rgba(251,249,245,.55) 65%, rgba(251,249,245,0) 100%) !important;
+  }
+  body.index .store-header .top-navbar,
+  body.index #mainnav, body.index #mainnav > .inner{
+    background:transparent !important; border-color:transparent !important; box-shadow:none !important;
+  }
+  body.index .top-navbar .header-search input{ background:rgba(220,208,189,.7) !important; }
+  body.index #main-content > .s-block--fixed-banner:first-of-type{ margin-top:0 !important; }
+}
+
+
+/* ============ 19. v6: أقسام بيج بالتبادل + السدو الناعم ============ */
+/* خط سدو رفيع تحت الهيرو */
+#main-content > .s-block--fixed-banner:first-of-type::after{
+  content:""; display:block; height:16px; margin-top:0;
+  background:var(--sadu-band-cream) repeat-x center / auto 16px;
+}
+/* أقسام مشمر البيج: خط سدو فوقها وتحتها */
+.s-block--bundle-ateem-features-arch::before, .s-block--bundle-ateem-features-arch::after,
+.s-block--bundle-ateem-heritage-section::before, .s-block--bundle-ateem-heritage-section::after,
+.s-block--bundle-features-diamond::before, .s-block--bundle-features-diamond::after{
+  content:""; display:block; height:16px;
+  background:#E6DCCD var(--sadu-band-cream) repeat-x center / auto 16px;
+}
+/* آراء العملاء على شريط بيج بعرض الشاشة */
+.s-block--testimonials{
+  background:#E6DCCD !important;
+  box-shadow:0 0 0 100vmax #E6DCCD; clip-path:inset(0 -100vmax);
+  padding-block:56px !important;
+}
+.s-block--testimonials .s-reviews-testimonial{ background:#FBF9F5 !important; border-color:#E6DCCD !important; }
+/* خط سدو فاتح فوق الفوتر */
+.store-footer::before{
+  content:""; display:block; height:16px;
+  background:var(--sadu-band-dark) repeat-x center / auto 16px; opacity:.7;
+}
