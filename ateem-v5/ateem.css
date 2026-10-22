@@ -812,21 +812,22 @@ body, .app-inner, #main-content{ background-color:#E6DCCD !important; }
 .top-navbar{ background:#E6DCCD !important; border-bottom:1px solid #D5C8B3 !important; }
 .top-navbar .header-search input, .s-search-input{ background:#DCD0BD !important; border:0 !important; border-radius:6px !important; }
 
-/* الهيدر: الشعار في النص — الروابط يمين — الأيقونات شمال */
+/* الهيدر: الشعار في النص فوق — الروابط سطر تحته في النص — الأيقونات شمال */
 #mainnav, #mainnav > .inner{ background:#E6DCCD !important; }
 #mainnav{ border-bottom:1px solid #D5C8B3 !important; }
 @media (min-width:1024px){
-  #mainnav .inner .container > .flex{ min-height:84px; }
+  #mainnav .inner .container > .flex{ min-height:132px !important; align-items:flex-start !important; position:relative !important; }
+  #mainnav .inner .container > .flex > div:last-child{ margin-top:20px !important; }
   #mainnav .navbar-brand{
-    position:absolute !important; left:50% !important; top:50% !important;
+    position:absolute !important; left:50% !important; top:44px !important;
     transform:translate(-50%,-50%) !important; z-index:2;
   }
   custom-main-menu{
-    position:static !important; transform:none !important; left:auto !important;
-    max-width:calc(50% - 140px) !important; width:auto !important;
+    position:absolute !important; left:50% !important; right:auto !important; top:auto !important; bottom:0 !important;
+    transform:translateX(-50%) !important; max-width:100% !important; width:max-content !important; height:auto !important;
   }
-  custom-main-menu .main-menu{ justify-content:flex-start !important; gap:2px !important; }
-  custom-main-menu .main-menu > li > a{ font-size:14px !important; font-weight:500 !important; padding:10px 10px !important; }
+  custom-main-menu .main-menu{ justify-content:center !important; gap:6px !important; }
+  custom-main-menu .main-menu > li > a{ font-size:14px !important; font-weight:500 !important; padding:12px 12px 14px !important; }
 }
 .navbar-brand img{ max-height:46px !important; }
 
