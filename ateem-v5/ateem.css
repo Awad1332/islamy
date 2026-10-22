@@ -845,7 +845,7 @@ salla-cart-summary .s-cart-summary-count{ background:#1E3333 !important; color:#
 }
 .s-slider-block__title-right h2::after{
   content:"" !important; display:block !important;
-  width:96px !important; height:3px !important; margin:14px auto 0 !important;
+  width:96px !important; height:3px !important; margin:20px auto 0 !important;
   background:#1E3333 !important; border-radius:2px;
 }
 .s-slider-block__title-right p{ font-size:16px !important; color:#7E766A !important; }
@@ -894,3 +894,10 @@ salla-cart-summary .s-cart-summary-count{ background:#1E3333 !important; color:#
 
 /* الشاشة الافتتاحية */
 html:has(body.index:not(.ateem-no-splash))::before{ background-color:#E6DCCD !important; }
+
+/* عنوان آراء العملاء في النص زي باقي العناوين */
+.s-reviews-header-wrapper{ flex-direction:column !important; align-items:center !important; gap:10px !important; margin-bottom:28px !important; }
+.s-reviews-header{ font-size:clamp(26px, 2.6vw, 36px) !important; font-weight:700 !important; color:#1E3333 !important; text-align:center !important; }
+.s-reviews-header::after{ content:""; display:block; width:96px; height:3px; margin:20px auto 0; background:#1E3333; border-radius:2px; }
+.s-reviews-display-all{ font-size:14px !important; color:#7E766A !important; }
+.s-reviews-testimonial__rating svg, .s-rating-stars svg{ fill:#1E3333 !important; color:#1E3333 !important; }

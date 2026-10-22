@@ -31,7 +31,7 @@
     ':host, *{ font-family:"Thmanyah Sans", sans-serif !important; letter-spacing:0 !important; }' +
     'h1, h2, h3, h4{ font-family:"Thmanyah Sans", sans-serif !important; font-weight:700 !important; }' +
     /* خط قصير تحت عناوين الأقسام */
-    '.title-main::after, .header .title::after{ content:""; display:block; width:96px; height:3px; margin:14px auto 0; background:' + '#1E3333' + '; border-radius:2px; }' +
+    '.title-main::after, .header .title::after{ content:""; display:block; width:96px; height:3px; margin:20px auto 0; background:' + '#1E3333' + '; border-radius:2px; }' +
     'p, span, a, button{ font-weight:400; }' +
     '.ateem-ornament, .ateem-ornament--dark, .ateem-band-green, .ateem-band-dark, .ateem-band-cream,' +
     '.sadu-column, .diamonds-footer{ display:none !important; }' +
@@ -62,7 +62,7 @@
       '.section-wrapper{ grid-template-columns:1fr !important; }' +
       '.content-container{ width:100% !important; max-width:1080px !important; margin-inline:auto !important; }' +
       '.subtitle{ color:' + G5 + ' !important; font-weight:500 !important; letter-spacing:.08em !important; }' +
-      '.title, .title span{ color:' + G9 + ' !important; }' +
+      '.title, .title span{ color:' + G9 + ' !important; }' + '.title{ font-size:clamp(26px, 2.8vw, 38px) !important; }' +
       '.description{ color:' + G5 + ' !important; }' +
       '.feature-box{ background:transparent !important; border:1px solid ' + LINE + ' !important; border-radius:10px !important; }' +
       '.feature-icon{ color:' + G9 + ' !important; }' +
